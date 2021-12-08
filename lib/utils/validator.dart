@@ -1,31 +1,31 @@
 class FieldValidator {
-    static String validateFirstName(String value) {
-        if (value.isEmpty) return 'Enter First Name!';
+    static bool validateFirstName(String value) {
+        if (value.isEmpty) return false;
         
-        return null;
+        return true;
     }
     
-    static String validateLastName(String value) {
-        if (value.isEmpty) return 'Enter Last Name!';
+    static bool validateLastName(String value) {
+        if (value.isEmpty) return false;
         
-        return null;
+        return true;
     }
     
-    static String validateEmail(String value) {
-        if (value.isEmpty) return 'Enter Email!';
+    static bool validateEmail(String value) {
+        if (value.isEmpty) return false;
         
         bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
         if (!emailValid) {
-            return 'Enter Valid Email!';
+            return false;
         }
         
-        return null;
+        return true;
     }
     
-    static String validatePhone(String value) {
-        if (value.isEmpty) return 'Enter Phone Number!';
+    static bool validatePhone(String value) {
+        if (value.isEmpty) return false;
         
-        return null;
+        return true;
     }
 }
 

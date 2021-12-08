@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:tech_night/utils/validator.dart';
 import 'customer.dart';
+import 'customer_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -136,11 +138,14 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
                   customer.lastName = lastnameController.text;
                   customer.email = emailController.text;
                   customer.contactNo = contactNoController.text;
-                  isvalid = EmailValidator.validate(customer.email);
+                  isvalid = FieldValidator.validateEmail(customer.email) && FieldValidator.validateFirstName(customer.firstName)
+                            && FieldValidator.validateLastName(customer.lastName) && FieldValidator.validatePhone(customer.contactNo);
                   if (isvalid) {
                     // Navigate
+                    formKey.currentState?.reset();
+                    Navigator.of(context).push(MaterialPageRoute(builder:(context)=>CustomerDetail(customer)));
                   } else {
-                    log('email not valid!');
+                    log('form\'s not valid!');
                   }
                 },
               ),
