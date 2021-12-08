@@ -91,24 +91,33 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
           padding: EdgeInsets.all(15),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 20),
               FormBuilderTextField(
                 name: "first_name",
                 controller: firstnameController,
                 decoration: InputDecoration(
-                    icon: Icon(Icons.person),
-                    hintText: 'Enter your first name',
-                    labelText: 'First name'
+                      icon: Icon(Icons.person),
+                      hintText: 'Enter your first name',
+                      labelText: 'First name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                    )
                   ),
                 ),
+              SizedBox(height: 20),
               FormBuilderTextField(
                 name: "last_name",
                 controller: lastnameController,
                 decoration: InputDecoration(
                     icon: Icon(Icons.person),
                     hintText: 'Enter your last name',
-                    labelText: 'Last name'
+                    labelText: 'Last name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
                 ),
               ),
+              SizedBox(height: 20),
               FormBuilderTextField(
                 name: "email",
                 controller: emailController,
@@ -116,9 +125,13 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
                 decoration: InputDecoration(
                     icon: Icon(Icons.email),
                     hintText: 'Enter your email',
-                    labelText: 'Email'
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                 ),
               ),
+              SizedBox(height: 20),
               FormBuilderTextField(
                 name: "phone",
                 controller: contactNoController,
@@ -126,10 +139,13 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
                 decoration: InputDecoration(
                     icon: Icon(Icons.phone),
                     hintText: 'Enter your contact numbwer',
-                    labelText: 'Contact No'
+                    labelText: 'Contact No',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 60),
               ElevatedButton(
                 child: Text("Submit"),
                 onPressed: (){
