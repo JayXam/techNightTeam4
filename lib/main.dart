@@ -94,6 +94,7 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
               SizedBox(height: 20),
               FormBuilderTextField(
                 name: "first_name",
+                keyboardType: TextInputType.text,
                 controller: firstnameController,
                 decoration: InputDecoration(
                       icon: Icon(Icons.person),
@@ -107,6 +108,7 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
               SizedBox(height: 20),
               FormBuilderTextField(
                 name: "last_name",
+                keyboardType: TextInputType.text,
                 controller: lastnameController,
                 decoration: InputDecoration(
                     icon: Icon(Icons.person),
