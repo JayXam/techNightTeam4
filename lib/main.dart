@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:tech_night/utils/validator.dart';
 import 'customer.dart';
 import 'customer_detail.dart';
