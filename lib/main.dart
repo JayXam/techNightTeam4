@@ -1,4 +1,8 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:email_validator/email_validator.dart';
+import 'customer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,13 +28,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Tech night'),
+      home: const MyCustomerForm(title: 'Tech night team 4'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class MyCustomerForm extends StatefulWidget {
+  const MyCustomerForm({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -44,11 +48,17 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyCustomerForm> createState() => _MyCustomerFormState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyCustomerFormState extends State<MyCustomerForm> {
+  final formKey = GlobalKey<FormBuilderState>();
+  Customer customer = Customer('', '', '', '');
+  bool isvalid = false;
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final contactNoController = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -57,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
@@ -75,30 +84,72 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      body: FormBuilder(
+        key: formKey,
+        child: Container(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: <Widget>[
+              FormBuilderTextField(
+                name: "first_name",
+                controller: firstnameController,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.person),
+                    hintText: 'Enter your first name',
+                    labelText: 'First name'
+                  ),
+                ),
+              FormBuilderTextField(
+                name: "last_name",
+                controller: lastnameController,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.person),
+                    hintText: 'Enter your last name',
+                    labelText: 'Last name'
+                ),
+              ),
+              FormBuilderTextField(
+                name: "email",
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.email),
+                    hintText: 'Enter your email',
+                    labelText: 'Email'
+                ),
+              ),
+              FormBuilderTextField(
+                name: "phone",
+                controller: contactNoController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.phone),
+                    hintText: 'Enter your contact numbwer',
+                    labelText: 'Contact No'
+                ),
+              ),
+              SizedBox(height: 40),
+              ElevatedButton(
+                child: Text("Submit"),
+                onPressed: (){
+                  customer.firstName = firstnameController.text;
+                  customer.lastName = lastnameController.text;
+                  customer.email = emailController.text;
+                  customer.contactNo = contactNoController.text;
 
-          ],
-        ),
-      )// This trailing comma makes auto-formatting nicer for build methods.
+                  isvalid = EmailValidator.validate(customer.email);
+                  if (isvalid) {
+                    // Navigate
+                  } else {
+                    log('email not valid!');
+                  }
+                },
+              ),
+              SizedBox(height: 30),
+            ],
+          ),
+        )
+      )
     );
   }
 }
