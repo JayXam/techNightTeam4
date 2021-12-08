@@ -136,7 +136,6 @@ class _MyCustomerFormState extends State<MyCustomerForm> {
                   customer.lastName = lastnameController.text;
                   customer.email = emailController.text;
                   customer.contactNo = contactNoController.text;
-
                   isvalid = EmailValidator.validate(customer.email);
                   if (isvalid) {
                     // Navigate
